@@ -2,39 +2,80 @@
 
 [ext_resource type="Script" path="res://PlayerController.gd" id="1_0ybxj"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_wye6p"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_21sjr"]
-size = Vector2(200, 20)
-
 [sub_resource type="CanvasTexture" id="CanvasTexture_w4ywb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hv0ns"]
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_gde37"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vj7qx"]
+size = Vector2(20, 1.9)
+
 [node name="Main" type="Node2D"]
 position = Vector2(559, 325)
 
-[node name="Floor" type="StaticBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Floor"]
-position = Vector2(0, 25)
-scale = Vector2(200, 20)
-texture = SubResource("CanvasTexture_wye6p")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(0, 25)
-shape = SubResource("RectangleShape2D_21sjr")
-
-[node name="Player" type="RigidBody2D" parent="."]
+[node name="Players" type="CharacterBody2D" parent="."]
+floor_stop_on_slope = false
 script = ExtResource("1_0ybxj")
+speed = 750
+jumpForce = 1750
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position_smoothing_enabled = true
-position_smoothing_speed = 3.0
+[node name="Camera2D" type="Camera2D" parent="Players"]
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="Sprite2D" type="Sprite2D" parent="Players"]
 scale = Vector2(20, 20)
 texture = SubResource("CanvasTexture_w4ywb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Players"]
 shape = SubResource("RectangleShape2D_hv0ns")
+
+[node name="Floor3" type="StaticBody2D" parent="."]
+position = Vector2(500, 100)
+rotation = -0.802851
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor3"]
+scale = Vector2(2000, 20)
+texture = SubResource("CanvasTexture_gde37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(100, 10)
+shape = SubResource("RectangleShape2D_vj7qx")
+
+[node name="Floor2" type="StaticBody2D" parent="."]
+position = Vector2(0, 50)
+rotation = -0.0872665
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor2"]
+scale = Vector2(2000, 20)
+texture = SubResource("CanvasTexture_gde37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(100, 10)
+shape = SubResource("RectangleShape2D_vj7qx")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(2.08165e-12, 25)
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+scale = Vector2(2000, 20)
+texture = SubResource("CanvasTexture_gde37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(100, 10)
+shape = SubResource("RectangleShape2D_vj7qx")
+
+[node name="Floor4" type="StaticBody2D" parent="."]
+position = Vector2(-500, 2.08165e-12)
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor4"]
+scale = Vector2(2000, 20)
+texture = SubResource("CanvasTexture_gde37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor4"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(100, 10)
+shape = SubResource("RectangleShape2D_vj7qx")
