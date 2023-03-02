@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://wr0bal1t33v5"]
+
+[ext_resource type="Script" path="res://PlayerController.gd" id="1_0ybxj"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wye6p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21sjr"]
+size = Vector2(200, 20)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_w4ywb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hv0ns"]
+
+[node name="Main" type="Node2D"]
+position = Vector2(559, 325)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+position = Vector2(0, 25)
+scale = Vector2(200, 20)
+texture = SubResource("CanvasTexture_wye6p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, 25)
+shape = SubResource("RectangleShape2D_21sjr")
+
+[node name="Player" type="RigidBody2D" parent="."]
+script = ExtResource("1_0ybxj")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(20, 20)
+texture = SubResource("CanvasTexture_w4ywb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_hv0ns")
