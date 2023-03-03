@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://wr0bal1t33v5"]
+[gd_scene load_steps=8 format=3 uid="uid://wr0bal1t33v5"]
 
 [ext_resource type="Script" path="res://PlayerController.gd" id="1_0ybxj"]
+[ext_resource type="Theme" uid="uid://cs53vtwmuxfcq" path="res://UITheme.tres" id="2_3sd15"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_w4ywb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hv0ns"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywvkn"]
+bg_color = Color(1, 0.317647, 0.447059, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_gde37"]
 
@@ -15,10 +23,10 @@ size = Vector2(20, 1.9)
 position = Vector2(559, 325)
 
 [node name="Players" type="CharacterBody2D" parent="."]
+position = Vector2(-7, 5)
 floor_stop_on_slope = false
 script = ExtResource("1_0ybxj")
 speed = 750
-jumpForce = 1750
 
 [node name="Camera2D" type="Camera2D" parent="Players"]
 
@@ -28,6 +36,28 @@ texture = SubResource("CanvasTexture_w4ywb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Players"]
 shape = SubResource("RectangleShape2D_hv0ns")
+
+[node name="HealthBar" type="Panel" parent="Players"]
+offset_left = -20.0
+offset_top = -19.0
+offset_right = 20.0
+offset_bottom = -14.0
+theme = ExtResource("2_3sd15")
+
+[node name="Panel" type="Panel" parent="Players/HealthBar"]
+offset_right = 33.0
+offset_bottom = 5.0
+theme = ExtResource("2_3sd15")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ywvkn")
+
+[node name="RightWall" type="RayCast2D" parent="Players"]
+rotation = -1.5708
+target_position = Vector2(2.08165e-12, 15)
+
+[node name="LeftWall" type="RayCast2D" parent="Players"]
+position = Vector2(0, 1)
+rotation = 1.5708
+target_position = Vector2(2.08165e-12, 15)
 
 [node name="Floor3" type="StaticBody2D" parent="."]
 position = Vector2(500, 100)
@@ -68,7 +98,7 @@ scale = Vector2(100, 10)
 shape = SubResource("RectangleShape2D_vj7qx")
 
 [node name="Floor4" type="StaticBody2D" parent="."]
-position = Vector2(-500, 2.08165e-12)
+position = Vector2(-548, -394)
 rotation = 1.5708
 
 [node name="Sprite2D" type="Sprite2D" parent="Floor4"]
@@ -76,6 +106,45 @@ scale = Vector2(2000, 20)
 texture = SubResource("CanvasTexture_gde37")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor4"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(100, 10)
+shape = SubResource("RectangleShape2D_vj7qx")
+
+[node name="Floor6" type="StaticBody2D" parent="."]
+position = Vector2(-226, -1148)
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor6"]
+scale = Vector2(2000, 20)
+texture = SubResource("CanvasTexture_gde37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor6"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(100, 10)
+shape = SubResource("RectangleShape2D_vj7qx")
+
+[node name="Floor7" type="StaticBody2D" parent="."]
+position = Vector2(98, -1227)
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor7"]
+scale = Vector2(2000, 20)
+texture = SubResource("CanvasTexture_gde37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor7"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(100, 10)
+shape = SubResource("RectangleShape2D_vj7qx")
+
+[node name="Floor5" type="StaticBody2D" parent="."]
+position = Vector2(-171, -1652)
+rotation = -0.802851
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor5"]
+scale = Vector2(2000, 20)
+texture = SubResource("CanvasTexture_gde37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor5"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(100, 10)
 shape = SubResource("RectangleShape2D_vj7qx")
