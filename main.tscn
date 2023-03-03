@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://wr0bal1t33v5"]
+[gd_scene load_steps=9 format=3 uid="uid://wr0bal1t33v5"]
 
 [ext_resource type="Script" path="res://PlayerController.gd" id="1_0ybxj"]
 [ext_resource type="Theme" uid="uid://cs53vtwmuxfcq" path="res://UITheme.tres" id="2_3sd15"]
+[ext_resource type="Script" path="res://PauseMenu.gd" id="2_of4s2"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_w4ywb"]
 
@@ -29,6 +30,44 @@ script = ExtResource("1_0ybxj")
 speed = 750
 
 [node name="Camera2D" type="Camera2D" parent="Players"]
+
+[node name="PauseMenu" type="Control" parent="Players/Camera2D"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = -572.0
+offset_top = -326.0
+offset_right = 576.0
+offset_bottom = 322.0
+script = ExtResource("2_of4s2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Players/Camera2D/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -50.5
+offset_right = 35.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Players/Camera2D/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Resume
+"
+
+[node name="OptionsButton" type="Button" parent="Players/Camera2D/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="Players/Camera2D/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
 
 [node name="Sprite2D" type="Sprite2D" parent="Players"]
 scale = Vector2(20, 20)
@@ -148,3 +187,7 @@ texture = SubResource("CanvasTexture_gde37")
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(100, 10)
 shape = SubResource("RectangleShape2D_vj7qx")
+
+[connection signal="pressed" from="Players/Camera2D/PauseMenu/VBoxContainer/ResumeButton" to="Players/Camera2D/PauseMenu" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Players/Camera2D/PauseMenu/VBoxContainer/OptionsButton" to="Players/Camera2D/PauseMenu" method="_on_options_button_pressed"]
+[connection signal="pressed" from="Players/Camera2D/PauseMenu/VBoxContainer/QuitButton" to="Players/Camera2D/PauseMenu" method="_on_quit_button_pressed"]
