@@ -1,7 +1,9 @@
 extends Control
 
-var frame_count = 0
 @export var frame_rate = 10
+
+var frame_count = 0
+
 
 func _process(_delta):
 	frame_count += 1
