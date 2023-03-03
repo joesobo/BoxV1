@@ -40,10 +40,6 @@ func is_aiming_into_wall():
 	)
 
 
-func check_wall_slide():
-	return velocity.y > 0 && is_aiming_into_wall()
-
-
 func check_wall_jump():
 	return (
 		next_to_wall()
@@ -56,6 +52,16 @@ func check_wall_jump():
 func check_gravity_fall():
 	return !is_sliding && !is_on_floor() && velocity.y < GRAVITY
 
+
+func horizontal_movement():
+	if wall_jump_count == 0 && !dashing:
+		velocity.x = horizontal_input.x * speed
+
+		# Sprint
+		if Input.is_action_pressed("sprint"):
+			velocity.x = horizontal_input.x * speed * 2
+
+
 func dash():
 	if is_on_floor() && !dashing:
 		can_dash = true
@@ -67,27 +73,12 @@ func dash():
 		await get_tree().create_timer(dash_time).timeout
 		dashing = false
 
-func get_input(delta):
-	vertical_input = Input.get_vector("", "", "jump", "down")
-	horizontal_input = Input.get_vector("left", "right", "", "")
 
-	# Horizontal movement
-	if wall_jump_count == 0 && !dashing:
-		velocity.x = horizontal_input.x * speed
+func wall_slide():
+	is_sliding = velocity.y > 0 && is_aiming_into_wall()
 
-		# Sprint
-		if Input.is_action_pressed("sprint"):
-			velocity.x = horizontal_input.x * speed * 2
 
-	# Dash
-	dash()
-
-	print(velocity.x)
-
-	# Wall slide
-	is_sliding = check_wall_slide()
-
-	# Wall jump
+func wall_jump():
 	if check_wall_jump():
 		is_sliding = false
 
@@ -96,12 +87,17 @@ func get_input(delta):
 
 		wall_jump_count += 1
 
-	# Jump
+
+func jump(delta):
 	if is_on_floor():
 		velocity.y = vertical_input.y * jump_force
 		wall_jump_count = 0
 
-	# Fall
+	if velocity.y < 0 && vertical_input.y == 0:
+		velocity.y += GRAVITY * low_jump_multiplier * delta
+
+
+func fall(delta):
 	if is_sliding:
 		velocity.y = GRAVITY
 	elif check_gravity_fall():
@@ -110,9 +106,23 @@ func get_input(delta):
 	# Fall faster
 	if velocity.y > 0:
 		velocity.y += GRAVITY * fall_multiplier * delta
-	# Dynamic Jump
-	elif velocity.y < 0 && vertical_input.y == 0:
-		velocity.y += GRAVITY * low_jump_multiplier * delta
+
+
+func get_input(delta):
+	vertical_input = Input.get_vector("", "", "jump", "down")
+	horizontal_input = Input.get_vector("left", "right", "", "")
+
+	horizontal_movement()
+
+	dash()
+
+	wall_slide()
+
+	wall_jump()
+
+	jump(delta)
+
+	fall(delta)
 
 
 func _physics_process(delta):

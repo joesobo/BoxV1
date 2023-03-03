@@ -34,6 +34,7 @@ dash_speed = 3000
 [node name="Camera2D" type="Camera2D" parent="Players"]
 
 [node name="PauseMenu" type="Control" parent="Players/Camera2D"]
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 0
