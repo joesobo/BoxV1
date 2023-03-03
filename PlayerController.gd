@@ -12,13 +12,15 @@ const GRAVITY := 98
 @export var fall_multiplier := 60
 @export var low_jump_multiplier := 100
 
-var wall_jump_count := 0
-var is_sliding := false
-var vertical_input := Vector2.ZERO
-var horizontal_input := Vector2.ZERO
+@export var wall_jump_count := 0
+@export var is_sliding := false
+@export var is_sprinting := false
+@export var is_jumping := false
 
+@export var dashing := false
 var can_dash := false
-var dashing := false
+
+var input := Vector2.ZERO
 
 
 func next_to_wall():
@@ -35,8 +37,8 @@ func next_to_right_wall():
 
 func is_aiming_into_wall():
 	return (
-		(next_to_right_wall() && get_wall_normal().x > 0 && horizontal_input.x < 0)
-		|| (next_to_left_wall() && get_wall_normal().x < 0 && horizontal_input.x > 0)
+		(next_to_right_wall() && get_wall_normal().x > 0 && input.x < 0)
+		|| (next_to_left_wall() && get_wall_normal().x < 0 && input.x > 0)
 	)
 
 
@@ -55,11 +57,13 @@ func check_gravity_fall():
 
 func horizontal_movement():
 	if wall_jump_count == 0 && !dashing:
-		velocity.x = horizontal_input.x * speed
+		velocity.x = input.x * speed
+		is_sprinting = false
 
 		# Sprint
 		if Input.is_action_pressed("sprint"):
-			velocity.x = horizontal_input.x * speed * 2
+			velocity.x = input.x * speed * 2
+			is_sprinting = true
 
 
 func dash():
@@ -69,7 +73,7 @@ func dash():
 	if can_dash && Input.is_action_just_pressed("dash"):
 		dashing = true
 		can_dash = false
-		velocity.x = horizontal_input.x * dash_speed
+		velocity.x = input.x * dash_speed
 		await get_tree().create_timer(dash_time).timeout
 		dashing = false
 
@@ -90,10 +94,17 @@ func wall_jump():
 
 func jump(delta):
 	if is_on_floor():
-		velocity.y = vertical_input.y * jump_force
+		# Reset Jump
+		is_jumping = false
 		wall_jump_count = 0
 
-	if velocity.y < 0 && vertical_input.y == 0:
+		# Normal Jump
+		velocity.y = input.y * jump_force
+		if velocity.y < 0:
+			is_jumping = true
+
+	# Dynamic Jump
+	if velocity.y < 0 && input.y == 0:
 		velocity.y += GRAVITY * low_jump_multiplier * delta
 
 
@@ -109,8 +120,17 @@ func fall(delta):
 
 
 func get_input(delta):
-	vertical_input = Input.get_vector("", "", "jump", "down")
-	horizontal_input = Input.get_vector("left", "right", "", "")
+	if Input.is_action_pressed("left"):
+		input.x = -1
+	elif Input.is_action_pressed("right"):
+		input.x = 1
+	else:
+		input.x = 0
+
+	if Input.is_action_pressed("jump"):
+		input.y = -1
+	else:
+		input.y = 0
 
 	horizontal_movement()
 
