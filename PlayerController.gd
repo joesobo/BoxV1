@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const GRAVITY := 98
+
 @export var speed := 600
 @export var jump_force := 1750
 @export var max_fall_speed := 2000
@@ -7,8 +9,6 @@ extends CharacterBody2D
 
 @export var fall_multiplier := 60
 @export var low_jump_multiplier := 100
-
-const gravity := 98
 
 var wall_jump_count := 0
 var is_sliding := false
@@ -34,8 +34,10 @@ func is_aiming_into_wall():
 		|| (next_to_left_wall() && get_wall_normal().x < 0 && horizontal_input.x > 0)
 	)
 
+
 func check_wall_slide():
 	return velocity.y > 0 && is_aiming_into_wall()
+
 
 func check_wall_jump():
 	return (
@@ -45,8 +47,10 @@ func check_wall_jump():
 		&& velocity.y > 0
 	)
 
+
 func check_gravity_fall():
-	return !is_sliding && !is_on_floor() && velocity.y < gravity
+	return !is_sliding && !is_on_floor() && velocity.y < GRAVITY
+
 
 func get_input(delta):
 	vertical_input = Input.get_vector("", "", "jump", "down")
@@ -75,16 +79,16 @@ func get_input(delta):
 
 	# Fall
 	if is_sliding:
-		velocity.y = gravity
+		velocity.y = GRAVITY
 	elif check_gravity_fall():
-		velocity.y += gravity
+		velocity.y += GRAVITY
 
 	# Fall faster
 	if velocity.y > 0:
-		velocity.y += gravity * fall_multiplier * delta
+		velocity.y += GRAVITY * fall_multiplier * delta
 	# Dynamic Jump
 	elif velocity.y < 0 && vertical_input.y == 0:
-		velocity.y += gravity * low_jump_multiplier * delta
+		velocity.y += GRAVITY * low_jump_multiplier * delta
 
 
 func _physics_process(delta):
