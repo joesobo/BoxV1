@@ -6,6 +6,8 @@ const GRAVITY := 98
 @export var jump_force := 1750
 @export var max_fall_speed := 2000
 @export var max_wall_jump_count := 3
+@export var dash_speed := 2000
+@export var dash_time := 0.1
 
 @export var fall_multiplier := 60
 @export var low_jump_multiplier := 100
@@ -14,6 +16,9 @@ var wall_jump_count := 0
 var is_sliding := false
 var vertical_input := Vector2.ZERO
 var horizontal_input := Vector2.ZERO
+
+var can_dash := false
+var dashing := false
 
 
 func next_to_wall():
@@ -51,14 +56,33 @@ func check_wall_jump():
 func check_gravity_fall():
 	return !is_sliding && !is_on_floor() && velocity.y < GRAVITY
 
+func dash():
+	if is_on_floor() && !dashing:
+		can_dash = true
+
+	if can_dash && Input.is_action_just_pressed("dash"):
+		dashing = true
+		can_dash = false
+		velocity.x = horizontal_input.x * dash_speed
+		await get_tree().create_timer(dash_time).timeout
+		dashing = false
 
 func get_input(delta):
 	vertical_input = Input.get_vector("", "", "jump", "down")
 	horizontal_input = Input.get_vector("left", "right", "", "")
 
 	# Horizontal movement
-	if wall_jump_count == 0:
+	if wall_jump_count == 0 && !dashing:
 		velocity.x = horizontal_input.x * speed
+
+		# Sprint
+		if Input.is_action_pressed("sprint"):
+			velocity.x = horizontal_input.x * speed * 2
+
+	# Dash
+	dash()
+
+	print(velocity.x)
 
 	# Wall slide
 	is_sliding = check_wall_slide()
