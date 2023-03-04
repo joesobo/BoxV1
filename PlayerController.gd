@@ -17,6 +17,7 @@ const GRAVITY := 98
 @export var is_sliding := false
 @export var is_sprinting := false
 @export var is_jumping := false
+@export var can_double_jump := false
 @export var knockback_direction := Vector2.ZERO
 
 @export var dashing := false
@@ -97,13 +98,22 @@ func wall_jump():
 func jump(delta):
 	if is_on_floor():
 		# Reset Jump
+		can_double_jump = false
 		is_jumping = false
 		wall_jump_count = 0
 
 		# Normal Jump
 		velocity.y = input.y * jump_force
 		if velocity.y < 0:
+			print(1)
 			is_jumping = true
+			can_double_jump = true
+
+	# Double Jump
+	if !is_on_floor() && can_double_jump && Input.is_action_just_pressed("jump"):
+		print(2)
+		velocity.y = input.y * jump_force
+		can_double_jump = false
 
 	# Dynamic Jump
 	if velocity.y < 0 && input.y == 0:
@@ -126,7 +136,7 @@ func knockback():
 		velocity = -knockback_direction * knockback_speed
 
 
-func get_input(delta):
+func get_input():
 	if Input.is_action_pressed("left"):
 		input.x = -1
 	elif Input.is_action_pressed("right"):
@@ -139,6 +149,11 @@ func get_input(delta):
 	else:
 		input.y = 0
 
+
+func _physics_process(delta):
+	get_input()
+
+	# Moving
 	horizontal_movement()
 
 	dash()
@@ -153,7 +168,5 @@ func get_input(delta):
 
 	knockback()
 
-
-func _physics_process(delta):
-	get_input(delta)
+	# Apply Movement
 	move_and_slide()

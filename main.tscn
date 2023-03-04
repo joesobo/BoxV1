@@ -158,6 +158,10 @@ text = "Sprinting:"
 layout_mode = 2
 text = "Dashing:"
 
+[node name="CanDoubleJump" type="Label" parent="Player/Camera2D/PlayerControllerMenu/Container"]
+layout_mode = 2
+text = "Double Jump:"
+
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 position = Vector2(-1.0848e-05, -2.6226e-06)
 scale = Vector2(0.3125, 0.3125)

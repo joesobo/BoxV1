@@ -28,3 +28,4 @@ func process_function():
 	$Container/IsJumping.text = "Jumping: " + str(player.is_jumping)
 	$Container/IsSprinting.text = "Sprinting: " + str(player.is_sprinting)
 	$Container/IsDashing.text = "Dashing: " + str(player.dashing)
+	$Container/CanDoubleJump.text = "Double Jump: " + str(player.can_double_jump)
