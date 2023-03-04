@@ -45,6 +45,7 @@ script = ExtResource("1_0ybxj")
 speed = 750
 max_wall_jump_count = 5
 dash_speed = 3000
+knockback_speed = 2000
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 

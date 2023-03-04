@@ -8,6 +8,7 @@ const GRAVITY := 98
 @export var max_wall_jump_count := 3
 @export var dash_speed := 2000
 @export var dash_time := 0.1
+@export var knockback_speed := 1000
 
 @export var fall_multiplier := 60
 @export var low_jump_multiplier := 100
@@ -16,6 +17,7 @@ const GRAVITY := 98
 @export var is_sliding := false
 @export var is_sprinting := false
 @export var is_jumping := false
+@export var knockback_direction := Vector2.ZERO
 
 @export var dashing := false
 var can_dash := false
@@ -119,6 +121,11 @@ func fall(delta):
 		velocity.y += GRAVITY * fall_multiplier * delta
 
 
+func knockback():
+	if knockback_direction != Vector2.ZERO:
+		velocity = -knockback_direction * knockback_speed
+
+
 func get_input(delta):
 	if Input.is_action_pressed("left"):
 		input.x = -1
@@ -143,6 +150,8 @@ func get_input(delta):
 	jump(delta)
 
 	fall(delta)
+
+	knockback()
 
 
 func _physics_process(delta):
