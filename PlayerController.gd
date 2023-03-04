@@ -8,7 +8,6 @@ const GRAVITY := 98
 @export var max_wall_jump_count := 3
 @export var dash_speed := 2000
 @export var dash_time := 0.1
-@export var knockback_speed := 1000
 
 @export var fall_multiplier := 60
 @export var low_jump_multiplier := 100
@@ -18,7 +17,7 @@ const GRAVITY := 98
 @export var is_sprinting := false
 @export var is_jumping := false
 @export var can_double_jump := false
-@export var knockback_direction := Vector2.ZERO
+@export var knockback_velocity := Vector2.ZERO
 
 @export var dashing := false
 var can_dash := false
@@ -48,8 +47,16 @@ func is_aiming_into_wall():
 func check_wall_jump():
 	return (
 		next_to_wall()
-		&& Input.is_action_pressed("jump")
 		&& wall_jump_count < max_wall_jump_count
+		&& velocity.y > 0
+	)
+
+
+func check_double_jump():
+	return (
+		!is_on_floor()
+		&& can_double_jump
+		&& (!next_to_wall() || wall_jump_count >= max_wall_jump_count)
 		&& velocity.y > 0
 	)
 
@@ -86,7 +93,7 @@ func wall_slide():
 
 
 func wall_jump():
-	if check_wall_jump():
+	if check_wall_jump() && Input.is_action_just_pressed("jump"):
 		is_sliding = false
 
 		velocity.y = -1 * jump_force
@@ -109,7 +116,7 @@ func jump(delta):
 			can_double_jump = true
 
 	# Double Jump
-	if !is_on_floor() && can_double_jump && Input.is_action_just_pressed("jump"):
+	if check_double_jump() && Input.is_action_just_pressed("jump"):
 		velocity.y = input.y * jump_force
 		can_double_jump = false
 
@@ -130,8 +137,8 @@ func fall(delta):
 
 
 func knockback():
-	if knockback_direction != Vector2.ZERO:
-		velocity = -knockback_direction * knockback_speed
+	if knockback_velocity != Vector2.ZERO:
+		velocity = knockback_velocity
 
 
 func get_input():

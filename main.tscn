@@ -45,7 +45,6 @@ script = ExtResource("1_0ybxj")
 speed = 750
 max_wall_jump_count = 5
 dash_speed = 3000
-knockback_speed = 2000
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
@@ -137,6 +136,10 @@ vertical_alignment = 1
 [node name="WallJumps" type="Label" parent="Player/Camera2D/PlayerControllerMenu/Container"]
 layout_mode = 2
 text = "Wall Jumps:"
+
+[node name="CanWallJump" type="Label" parent="Player/Camera2D/PlayerControllerMenu/Container"]
+layout_mode = 2
+text = "Can Wall Jump:"
 
 [node name="IsGrounded" type="Label" parent="Player/Camera2D/PlayerControllerMenu/Container"]
 layout_mode = 2

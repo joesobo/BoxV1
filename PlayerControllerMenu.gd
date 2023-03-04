@@ -23,9 +23,10 @@ func process_function():
 	$Container/VerticalSpeed/Label.text = "vY: " + str(round(player.velocity.y))
 
 	$Container/WallJumps.text = "Wall Jumps: " + str(player.wall_jump_count)
+	$Container/CanWallJump.text = "Can Wall Jump: " + str(player.check_wall_jump())
 	$Container/IsGrounded.text = "Grounded: " + str(player.is_on_floor())
 	$Container/IsWallSliding.text = "Wall Sliding: " + str(player.is_sliding)
 	$Container/IsJumping.text = "Jumping: " + str(player.is_jumping)
 	$Container/IsSprinting.text = "Sprinting: " + str(player.is_sprinting)
 	$Container/IsDashing.text = "Dashing: " + str(player.dashing)
-	$Container/CanDoubleJump.text = "Double Jump: " + str(player.can_double_jump)
+	$Container/CanDoubleJump.text = "Double Jump: " + str(player.check_double_jump())
