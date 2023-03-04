@@ -3,17 +3,17 @@ extends Control
 @export var frame_rate = 10
 
 var frame_count = 0
+var player
 
 
 func _process(_delta):
+	player = get_node("../../../Player")
 	frame_count += 1
 	if frame_count % frame_rate == 0:
 		process_function()
 
 
 func process_function():
-	var player := get_node("../../../Player")
-
 	$Container/HorizontalSpeed.value = abs(player.velocity.x)
 	$Container/HorizontalSpeed.show_percentage = false
 	$Container/HorizontalSpeed/Label.text = "vX: " + str(round(player.velocity.x))

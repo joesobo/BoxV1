@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://wr0bal1t33v5"]
+[gd_scene load_steps=16 format=3 uid="uid://wr0bal1t33v5"]
 
 [ext_resource type="Script" path="res://PlayerController.gd" id="1_0ybxj"]
 [ext_resource type="Theme" uid="uid://cs53vtwmuxfcq" path="res://UITheme.tres" id="2_3sd15"]
 [ext_resource type="Script" path="res://PauseMenu.gd" id="2_of4s2"]
 [ext_resource type="Script" path="res://PlayerControllerMenu.gd" id="3_jseux"]
+[ext_resource type="Script" path="res://GameMenu.gd" id="4_c2ib3"]
 [ext_resource type="Script" path="res://Gun.gd" id="5_a3eu1"]
 [ext_resource type="PackedScene" uid="uid://gyanoo81ygvr" path="res://bullet.tscn" id="6_gk67w"]
 
@@ -164,6 +165,34 @@ text = "Dashing:"
 [node name="CanDoubleJump" type="Label" parent="Player/Camera2D/PlayerControllerMenu/Container"]
 layout_mode = 2
 text = "Double Jump:"
+
+[node name="GameMenu" type="Control" parent="Player/Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -575.0
+offset_top = -326.0
+offset_right = 577.0
+offset_bottom = 326.0
+script = ExtResource("4_c2ib3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player/Camera2D/GameMenu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 56.0
+grow_horizontal = 0
+
+[node name="Time" type="Label" parent="Player/Camera2D/GameMenu/VBoxContainer"]
+layout_mode = 2
+text = "Time:"
+
+[node name="Score" type="Label" parent="Player/Camera2D/GameMenu/VBoxContainer"]
+layout_mode = 2
+text = "Score:"
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 position = Vector2(-1.0848e-05, -2.6226e-06)

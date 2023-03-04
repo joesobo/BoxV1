@@ -45,11 +45,7 @@ func is_aiming_into_wall():
 
 
 func check_wall_jump():
-	return (
-		next_to_wall()
-		&& wall_jump_count < max_wall_jump_count
-		&& velocity.y > 0
-	)
+	return next_to_wall() && wall_jump_count < max_wall_jump_count && velocity.y > 0
 
 
 func check_double_jump():
