@@ -1,12 +1,15 @@
 extends Control
 
-var time = 0
 @export var score = 0
+
+var time = 0
+
 
 func count_time():
 	await get_tree().create_timer(1).timeout
 	time += 1
 	count_time()
+
 
 func stringify_time():
 	var minutes = int(time / 60)
@@ -18,8 +21,10 @@ func stringify_time():
 
 	return minutes_string + "m " + seconds_string + "s"
 
+
 func _ready():
 	count_time()
+
 
 func _process(_delta):
 	$VBoxContainer/Time.text = "Time: " + stringify_time()

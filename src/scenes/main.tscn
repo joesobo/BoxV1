@@ -1,12 +1,12 @@
 [gd_scene load_steps=16 format=3 uid="uid://wr0bal1t33v5"]
 
-[ext_resource type="Script" path="res://PlayerController.gd" id="1_0ybxj"]
+[ext_resource type="Script" path="res://src/player/PlayerController.gd" id="1_n6x0h"]
 [ext_resource type="Theme" uid="uid://cs53vtwmuxfcq" path="res://UITheme.tres" id="2_3sd15"]
-[ext_resource type="Script" path="res://PauseMenu.gd" id="2_of4s2"]
-[ext_resource type="Script" path="res://PlayerControllerMenu.gd" id="3_jseux"]
-[ext_resource type="Script" path="res://GameMenu.gd" id="4_c2ib3"]
-[ext_resource type="Script" path="res://Gun.gd" id="5_a3eu1"]
-[ext_resource type="PackedScene" uid="uid://gyanoo81ygvr" path="res://bullet.tscn" id="6_gk67w"]
+[ext_resource type="Script" path="res://src/menus/PauseMenu.gd" id="2_32g0p"]
+[ext_resource type="Script" path="res://src/menus/PlayerControllerMenu.gd" id="3_gqoye"]
+[ext_resource type="Script" path="res://src/menus/GameMenu.gd" id="4_y1e38"]
+[ext_resource type="PackedScene" uid="uid://gyanoo81ygvr" path="res://src/prefabs/bullet.tscn" id="6_gk67w"]
+[ext_resource type="Script" path="res://src/player/Gun.gd" id="6_t1ta0"]
 
 [sub_resource type="Gradient" id="Gradient_mg3hq"]
 offsets = PackedFloat32Array(0, 0.135484)
@@ -42,7 +42,7 @@ position = Vector2(559, 325)
 z_index = 1
 position = Vector2(-7, 5)
 floor_stop_on_slope = false
-script = ExtResource("1_0ybxj")
+script = ExtResource("1_n6x0h")
 speed = 750
 max_wall_jump_count = 5
 dash_speed = 3000
@@ -57,7 +57,7 @@ offset_left = -572.0
 offset_top = -326.0
 offset_right = 576.0
 offset_bottom = 322.0
-script = ExtResource("2_of4s2")
+script = ExtResource("2_32g0p")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Player/Camera2D/PauseMenu"]
 layout_mode = 1
@@ -94,8 +94,7 @@ offset_left = -572.0
 offset_top = -326.0
 offset_right = 576.0
 offset_bottom = 322.0
-script = ExtResource("3_jseux")
-frame_rate = 20
+script = ExtResource("3_gqoye")
 
 [node name="Container" type="VBoxContainer" parent="Player/Camera2D/PlayerControllerMenu"]
 layout_mode = 1
@@ -173,7 +172,7 @@ offset_left = -575.0
 offset_top = -326.0
 offset_right = 577.0
 offset_bottom = 326.0
-script = ExtResource("4_c2ib3")
+script = ExtResource("4_y1e38")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Player/Camera2D/GameMenu"]
 layout_mode = 1
@@ -226,7 +225,7 @@ rotation = 1.5708
 target_position = Vector2(2.08165e-12, 15)
 
 [node name="Gun" type="Node2D" parent="Player"]
-script = ExtResource("5_a3eu1")
+script = ExtResource("6_t1ta0")
 bullet_scene = ExtResource("6_gk67w")
 bullet_speed = 2000.0
 
