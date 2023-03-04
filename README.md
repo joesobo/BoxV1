@@ -11,9 +11,12 @@
 - [ ] Better Info UI
 - [ ] Better Pause UI
 - [ ] Enemies
-	- [ ] Spawn
+	- [x] Movement / AI
+	- [x] Spawn
 	- [ ] Killing
 - [ ] Damage
+	- [ ] Taking
+	- [ ] Displaying
 - [ ] End Screen
 - [x] Timer
 - [ ] Kills

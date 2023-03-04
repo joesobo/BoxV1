@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwheupcsc54i2"]
+
+[ext_resource type="Script" path="res://src/enemy/Enemy.gd" id="1_c1vff"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_su5w3"]
+friction = 0.0
+
+[sub_resource type="Gradient" id="Gradient_xbhgb"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.975665, 1.55399e-06, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5e01q"]
+gradient = SubResource("Gradient_xbhgb")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5vxq"]
+
+[node name="Enemy" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_su5w3")
+gravity_scale = 2.66454e-15
+continuous_cd = 2
+script = ExtResource("1_c1vff")
+max_speed = 1000
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3.57628e-07, 0)
+scale = Vector2(0.078125, 20)
+texture = SubResource("GradientTexture1D_5e01q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w5vxq")
+
+[node name="Ray1" type="RayCast2D" parent="."]
+target_position = Vector2(0, 32)
+
+[node name="Ray2" type="RayCast2D" parent="."]
+rotation = 1.5708
+target_position = Vector2(0, 32)
+
+[node name="Ray3" type="RayCast2D" parent="."]
+rotation = 3.14159
+target_position = Vector2(0, 32)
+
+[node name="Ray4" type="RayCast2D" parent="."]
+rotation = 4.71239
+target_position = Vector2(0, 32)

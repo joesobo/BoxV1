@@ -7,6 +7,7 @@ size = Vector2(1, 1)
 
 [node name="Bullet" type="RigidBody2D"]
 gravity_scale = 2.66454e-15
+continuous_cd = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(10, 10)

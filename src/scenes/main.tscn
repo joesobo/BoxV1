@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://wr0bal1t33v5"]
+[gd_scene load_steps=19 format=3 uid="uid://wr0bal1t33v5"]
 
 [ext_resource type="Script" path="res://src/player/PlayerController.gd" id="1_n6x0h"]
 [ext_resource type="Theme" uid="uid://cs53vtwmuxfcq" path="res://UITheme.tres" id="2_3sd15"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://src/menus/GameMenu.gd" id="4_y1e38"]
 [ext_resource type="PackedScene" uid="uid://gyanoo81ygvr" path="res://src/prefabs/bullet.tscn" id="6_gk67w"]
 [ext_resource type="Script" path="res://src/player/Gun.gd" id="6_t1ta0"]
+[ext_resource type="Script" path="res://src/enemy/EnemySpawn.gd" id="8_3tvd4"]
+[ext_resource type="PackedScene" uid="uid://cwheupcsc54i2" path="res://src/prefabs/Enemy.tscn" id="9_bubfs"]
 
 [sub_resource type="Gradient" id="Gradient_mg3hq"]
 offsets = PackedFloat32Array(0, 0.135484)
@@ -34,6 +36,8 @@ gradient = SubResource("Gradient_f8jgo")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vj7qx"]
 size = Vector2(20, 1.9)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5sge0"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(559, 325)
@@ -237,95 +241,107 @@ offset = Vector2(32, 2.08165e-12)
 [node name="SpawnPosition" type="Node2D" parent="Player/Gun"]
 position = Vector2(22, 0)
 
-[node name="Floor3" type="StaticBody2D" parent="."]
-position = Vector2(500, 100)
+[node name="Floors" type="Node" parent="."]
+
+[node name="Floor3" type="StaticBody2D" parent="Floors"]
+position = Vector2(1059, 425)
 rotation = -0.802851
 
-[node name="Sprite2D" type="Sprite2D" parent="Floor3"]
+[node name="Sprite2D" type="Sprite2D" parent="Floors/Floor3"]
 scale = Vector2(2000, 20)
 texture = SubResource("CanvasTexture_gde37")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floors/Floor3"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(100, 10)
 shape = SubResource("RectangleShape2D_vj7qx")
 
-[node name="Floor2" type="StaticBody2D" parent="."]
-position = Vector2(0, 50)
+[node name="Floor2" type="StaticBody2D" parent="Floors"]
+position = Vector2(559, 375)
 rotation = -0.0872665
 
-[node name="Sprite2D" type="Sprite2D" parent="Floor2"]
+[node name="Sprite2D" type="Sprite2D" parent="Floors/Floor2"]
 scale = Vector2(2000, 20)
 texture = SubResource("CanvasTexture_gde37")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floors/Floor2"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(100, 10)
 shape = SubResource("RectangleShape2D_vj7qx")
 
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(2.08165e-12, 25)
+[node name="Floor" type="StaticBody2D" parent="Floors"]
+position = Vector2(559, 350)
 
-[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+[node name="Sprite2D" type="Sprite2D" parent="Floors/Floor"]
 scale = Vector2(2000, 20)
 texture = SubResource("CanvasTexture_gde37")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floors/Floor"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(100, 10)
 shape = SubResource("RectangleShape2D_vj7qx")
 
-[node name="Floor4" type="StaticBody2D" parent="."]
-position = Vector2(-548, -394)
+[node name="Floor4" type="StaticBody2D" parent="Floors"]
+position = Vector2(11, -69)
 rotation = 1.5708
 
-[node name="Sprite2D" type="Sprite2D" parent="Floor4"]
+[node name="Sprite2D" type="Sprite2D" parent="Floors/Floor4"]
 scale = Vector2(2000, 20)
 texture = SubResource("CanvasTexture_gde37")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floors/Floor4"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(100, 10)
 shape = SubResource("RectangleShape2D_vj7qx")
 
-[node name="Floor6" type="StaticBody2D" parent="."]
-position = Vector2(-226, -1148)
+[node name="Floor6" type="StaticBody2D" parent="Floors"]
+position = Vector2(333, -823)
 rotation = 1.5708
 
-[node name="Sprite2D" type="Sprite2D" parent="Floor6"]
+[node name="Sprite2D" type="Sprite2D" parent="Floors/Floor6"]
 scale = Vector2(2000, 20)
 texture = SubResource("CanvasTexture_gde37")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor6"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floors/Floor6"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(100, 10)
 shape = SubResource("RectangleShape2D_vj7qx")
 
-[node name="Floor7" type="StaticBody2D" parent="."]
-position = Vector2(98, -1227)
+[node name="Floor7" type="StaticBody2D" parent="Floors"]
+position = Vector2(657, -902)
 rotation = 1.5708
 
-[node name="Sprite2D" type="Sprite2D" parent="Floor7"]
+[node name="Sprite2D" type="Sprite2D" parent="Floors/Floor7"]
 scale = Vector2(2000, 20)
 texture = SubResource("CanvasTexture_gde37")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor7"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floors/Floor7"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(100, 10)
 shape = SubResource("RectangleShape2D_vj7qx")
 
-[node name="Floor5" type="StaticBody2D" parent="."]
-position = Vector2(-171, -1652)
+[node name="Floor5" type="StaticBody2D" parent="Floors"]
+position = Vector2(388, -1327)
 rotation = -0.802851
 
-[node name="Sprite2D" type="Sprite2D" parent="Floor5"]
+[node name="Sprite2D" type="Sprite2D" parent="Floors/Floor5"]
 scale = Vector2(2000, 20)
 texture = SubResource("CanvasTexture_gde37")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor5"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floors/Floor5"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(100, 10)
 shape = SubResource("RectangleShape2D_vj7qx")
+
+[node name="EnemySpawn" type="Node2D" parent="."]
+position = Vector2(361, -154)
+script = ExtResource("8_3tvd4")
+enemy_scene = ExtResource("9_bubfs")
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemySpawn"]
+rotation = 0.785398
+scale = Vector2(8, 8)
+texture = SubResource("CanvasTexture_5sge0")
 
 [connection signal="pressed" from="Player/Camera2D/PauseMenu/VBoxContainer/ResumeButton" to="Player/Camera2D/PauseMenu" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Player/Camera2D/PauseMenu/VBoxContainer/OptionsButton" to="Player/Camera2D/PauseMenu" method="_on_options_button_pressed"]
