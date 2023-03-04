@@ -105,13 +105,11 @@ func jump(delta):
 		# Normal Jump
 		velocity.y = input.y * jump_force
 		if velocity.y < 0:
-			print(1)
 			is_jumping = true
 			can_double_jump = true
 
 	# Double Jump
 	if !is_on_floor() && can_double_jump && Input.is_action_just_pressed("jump"):
-		print(2)
 		velocity.y = input.y * jump_force
 		can_double_jump = false
 
