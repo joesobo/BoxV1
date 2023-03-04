@@ -1,11 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://wr0bal1t33v5"]
+[gd_scene load_steps=15 format=3 uid="uid://wr0bal1t33v5"]
 
 [ext_resource type="Script" path="res://PlayerController.gd" id="1_0ybxj"]
 [ext_resource type="Theme" uid="uid://cs53vtwmuxfcq" path="res://UITheme.tres" id="2_3sd15"]
 [ext_resource type="Script" path="res://PauseMenu.gd" id="2_of4s2"]
 [ext_resource type="Script" path="res://PlayerControllerMenu.gd" id="3_jseux"]
+[ext_resource type="Script" path="res://Gun.gd" id="5_a3eu1"]
+[ext_resource type="PackedScene" uid="uid://gyanoo81ygvr" path="res://bullet.tscn" id="6_gk67w"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_w4ywb"]
+[sub_resource type="Gradient" id="Gradient_mg3hq"]
+offsets = PackedFloat32Array(0, 0.135484)
+colors = PackedColorArray(0.728822, 0.728822, 0.728822, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vklob"]
+gradient = SubResource("Gradient_mg3hq")
+fill_from = Vector2(1, 0.995652)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hv0ns"]
 
@@ -15,6 +23,11 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="Gradient" id="Gradient_f8jgo"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4c0jx"]
+gradient = SubResource("Gradient_f8jgo")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_gde37"]
 
@@ -145,8 +158,9 @@ layout_mode = 2
 text = "Dashing:"
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-scale = Vector2(20, 20)
-texture = SubResource("CanvasTexture_w4ywb")
+position = Vector2(-1.0848e-05, -2.6226e-06)
+scale = Vector2(0.3125, 0.3125)
+texture = SubResource("GradientTexture2D_vklob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_hv0ns")
@@ -173,6 +187,19 @@ target_position = Vector2(2.08165e-12, 15)
 position = Vector2(0, 1)
 rotation = 1.5708
 target_position = Vector2(2.08165e-12, 15)
+
+[node name="Gun" type="Node2D" parent="Player"]
+script = ExtResource("5_a3eu1")
+bullet_scene = ExtResource("6_gk67w")
+bullet_speed = 2000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Gun"]
+scale = Vector2(0.3125, 0.0624997)
+texture = SubResource("GradientTexture2D_4c0jx")
+offset = Vector2(32, 2.08165e-12)
+
+[node name="SpawnPosition" type="Node2D" parent="Player/Gun"]
+position = Vector2(22, 0)
 
 [node name="Floor3" type="StaticBody2D" parent="."]
 position = Vector2(500, 100)

@@ -16,11 +16,11 @@ func process_function():
 
 	$Container/HorizontalSpeed.value = abs(player.velocity.x)
 	$Container/HorizontalSpeed.show_percentage = false
-	$Container/HorizontalSpeed/Label.text = "x: " + str(round(player.velocity.x))
+	$Container/HorizontalSpeed/Label.text = "vX: " + str(round(player.velocity.x))
 
 	$Container/VerticalSpeed.value = abs(player.velocity.y)
 	$Container/VerticalSpeed.show_percentage = false
-	$Container/VerticalSpeed/Label.text = "y: " + str(round(player.velocity.y))
+	$Container/VerticalSpeed/Label.text = "vY: " + str(round(player.velocity.y))
 
 	$Container/WallJumps.text = "Wall Jumps: " + str(player.wall_jump_count)
 	$Container/IsGrounded.text = "Grounded: " + str(player.is_on_floor())
