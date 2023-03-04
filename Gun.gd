@@ -12,8 +12,6 @@ func _process(_delta):
 
 		bullet.position = $SpawnPosition.get_global_position()
 		bullet.rotation_degrees = rotation_degrees
-		# bullet.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(rotation))
-		# set bullet velocity
 		bullet.set_linear_velocity(Vector2(bullet_speed, 0).rotated(rotation))
 
 		get_tree().get_root().call_deferred("add_child", bullet)
