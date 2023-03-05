@@ -16,7 +16,7 @@
 	- [x] Killing
 - [ ] Damage
 	- [x] Taking
-	- [ ] Displaying
+	- [x] Displaying
 - [ ] End Screen
 - [x] Timer
 - [ ] Kills

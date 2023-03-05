@@ -28,6 +28,8 @@ corner_radius_bottom_left = 10
 physics_material_override = SubResource("PhysicsMaterial_su5w3")
 gravity_scale = 2.66454e-15
 continuous_cd = 2
+max_contacts_reported = 1
+contact_monitor = true
 lock_rotation = true
 script = ExtResource("1_c1vff")
 speed = 300
@@ -64,9 +66,11 @@ offset_bottom = -14.0
 theme = ExtResource("2_jvi32")
 script = ExtResource("3_n4f40")
 
-[node name="Panel" type="Panel" parent="EnemyHealth"]
+[node name="HealthPanel" type="Panel" parent="EnemyHealth"]
 layout_mode = 0
-offset_right = 33.0
+offset_right = 40.0
 offset_bottom = 5.0
 theme = ExtResource("2_jvi32")
 theme_override_styles/panel = SubResource("StyleBoxFlat_0mxh2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

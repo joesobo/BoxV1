@@ -228,9 +228,9 @@ offset_bottom = -14.0
 theme = ExtResource("2_3sd15")
 script = ExtResource("1_mdk3r")
 
-[node name="Panel" type="Panel" parent="Player/PlayerHealth"]
+[node name="HealthPanel" type="Panel" parent="Player/PlayerHealth"]
 layout_mode = 0
-offset_right = 33.0
+offset_right = 40.0
 offset_bottom = 5.0
 theme = ExtResource("2_3sd15")
 theme_override_styles/panel = SubResource("StyleBoxFlat_ywvkn")

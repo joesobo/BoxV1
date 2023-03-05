@@ -40,3 +40,9 @@ func seek(delta):
 		steer = steer.limit_length(speed)
 
 		linear_velocity += steer * delta
+
+
+func _on_body_entered(body):
+	print(body)
+	if body == player:
+		player.get_node("PlayerHealth").damage(1)
