@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwheupcsc54i2"]
+[gd_scene load_steps=9 format=3 uid="uid://cwheupcsc54i2"]
 
 [ext_resource type="Script" path="res://src/enemy/Enemy.gd" id="1_c1vff"]
+[ext_resource type="Theme" uid="uid://cs53vtwmuxfcq" path="res://UITheme.tres" id="2_jvi32"]
+[ext_resource type="Script" path="res://src/enemy/EnemyHealth.gd" id="3_n4f40"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_su5w3"]
 friction = 0.0
@@ -15,13 +17,21 @@ gradient = SubResource("Gradient_xbhgb")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w5vxq"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0mxh2"]
+bg_color = Color(0.964706, 0.392157, 0.290196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="Enemy" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_su5w3")
 gravity_scale = 2.66454e-15
 continuous_cd = 2
 lock_rotation = true
 script = ExtResource("1_c1vff")
-max_speed = 1000
+speed = 300
+max_speed = 800
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(3.57628e-07, 0)
@@ -45,3 +55,18 @@ target_position = Vector2(0, 32)
 [node name="Ray4" type="RayCast2D" parent="."]
 rotation = 4.71239
 target_position = Vector2(0, 32)
+
+[node name="EnemyHealth" type="Panel" parent="."]
+offset_left = -20.0
+offset_top = -19.0
+offset_right = 20.0
+offset_bottom = -14.0
+theme = ExtResource("2_jvi32")
+script = ExtResource("3_n4f40")
+
+[node name="Panel" type="Panel" parent="EnemyHealth"]
+layout_mode = 0
+offset_right = 33.0
+offset_bottom = 5.0
+theme = ExtResource("2_jvi32")
+theme_override_styles/panel = SubResource("StyleBoxFlat_0mxh2")

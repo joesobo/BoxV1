@@ -167,7 +167,7 @@ func _physics_process(delta):
 
 	fall(delta)
 
-	knockback()
+	# knockback()
 
 	# Apply Movement
 	move_and_slide()

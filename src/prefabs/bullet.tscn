@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://gyanoo81ygvr"]
+[gd_scene load_steps=4 format=3 uid="uid://gyanoo81ygvr"]
+
+[ext_resource type="Script" path="res://src/player/bullet.gd" id="1_7cgqd"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_2hrgk"]
 
@@ -8,6 +10,9 @@ size = Vector2(1, 1)
 [node name="Bullet" type="RigidBody2D"]
 gravity_scale = 2.66454e-15
 continuous_cd = 1
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_7cgqd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(10, 10)
@@ -17,3 +22,5 @@ texture = SubResource("CanvasTexture_2hrgk")
 position = Vector2(2.08165e-11, 2.08165e-11)
 scale = Vector2(10, 10)
 shape = SubResource("RectangleShape2D_pquv8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

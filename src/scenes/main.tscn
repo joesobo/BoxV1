@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://wr0bal1t33v5"]
+[gd_scene load_steps=22 format=3 uid="uid://wr0bal1t33v5"]
 
+[ext_resource type="Script" path="res://src/player/PlayerHealth.gd" id="1_mdk3r"]
 [ext_resource type="Script" path="res://src/player/PlayerController.gd" id="1_n6x0h"]
 [ext_resource type="Theme" uid="uid://cs53vtwmuxfcq" path="res://UITheme.tres" id="2_3sd15"]
 [ext_resource type="Script" path="res://src/menus/PauseMenu.gd" id="2_32g0p"]
@@ -56,9 +57,6 @@ z_index = 1
 position = Vector2(-7, 5)
 floor_stop_on_slope = false
 script = ExtResource("1_n6x0h")
-speed = 750
-max_wall_jump_count = 5
-dash_speed = 3000
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 z_index = 10
@@ -222,14 +220,15 @@ texture = SubResource("GradientTexture1D_v1ifi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_hv0ns")
 
-[node name="HealthBar" type="Panel" parent="Player"]
+[node name="PlayerHealth" type="Panel" parent="Player"]
 offset_left = -20.0
 offset_top = -19.0
 offset_right = 20.0
 offset_bottom = -14.0
 theme = ExtResource("2_3sd15")
+script = ExtResource("1_mdk3r")
 
-[node name="Panel" type="Panel" parent="Player/HealthBar"]
+[node name="Panel" type="Panel" parent="Player/PlayerHealth"]
 layout_mode = 0
 offset_right = 33.0
 offset_bottom = 5.0

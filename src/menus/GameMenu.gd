@@ -1,8 +1,7 @@
 extends Control
 
 @export var score = 0
-
-var time = 0
+@export var time = 0
 
 
 func count_time():
