@@ -7,8 +7,9 @@ var initial_width
 var can_damage := true
 var player
 
+
 func _ready():
-	player = get_node('../../Player')
+	player = get_node("../../Player")
 
 	health_panel = $HealthPanel
 
@@ -30,6 +31,8 @@ func damage(value: int, direction: Vector2):
 
 		if health <= 0:
 			print("Game Over")
+			player.get_node("Camera2D/GameOverMenu").game_over()
+			player.get_node("Body").queue_free()
 
 		# Reset knockback
 		await get_tree().create_timer(0.5).timeout

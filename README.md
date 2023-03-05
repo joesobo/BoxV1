@@ -18,7 +18,8 @@
 	- [x] Taking
 	- [x] Displaying
 	- [x] Knockback
-- [ ] End Screen
+- [x] End Screen
+	- [ ] Play Again Button
 - [x] Timer
 - [x] Kills
 - [ ] Textures

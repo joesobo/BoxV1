@@ -6,7 +6,7 @@ func _ready():
 
 
 func _on_body_entered(body: Node):
-	if body.name == "Enemy":
+	if body.name.contains("Enemy"):
 		body.get_node("EnemyHealth").damage(1)
 
 	queue_free()

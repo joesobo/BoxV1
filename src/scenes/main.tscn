@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://wr0bal1t33v5"]
+[gd_scene load_steps=23 format=3 uid="uid://wr0bal1t33v5"]
 
 [ext_resource type="Script" path="res://src/player/PlayerHealth.gd" id="1_mdk3r"]
 [ext_resource type="Script" path="res://src/player/PlayerController.gd" id="1_n6x0h"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/menus/PauseMenu.gd" id="2_32g0p"]
 [ext_resource type="Script" path="res://src/menus/PlayerControllerMenu.gd" id="3_gqoye"]
 [ext_resource type="Script" path="res://src/menus/GameMenu.gd" id="4_y1e38"]
+[ext_resource type="Script" path="res://src/menus/GameOverMenu.gd" id="5_41kut"]
 [ext_resource type="PackedScene" uid="uid://gyanoo81ygvr" path="res://src/prefabs/bullet.tscn" id="6_gk67w"]
 [ext_resource type="Script" path="res://src/player/Gun.gd" id="6_t1ta0"]
 [ext_resource type="Script" path="res://src/enemy/EnemySpawn.gd" id="8_3tvd4"]
@@ -205,6 +206,42 @@ text = "Time:"
 layout_mode = 2
 text = "Score:"
 
+[node name="GameOverMenu" type="Control" parent="Player/Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -545.0
+offset_top = -328.0
+offset_right = 574.0
+offset_bottom = 323.0
+script = ExtResource("5_41kut")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player/Camera2D/GameOverMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -23.5
+offset_right = 20.0
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score" type="Label" parent="Player/Camera2D/GameOverMenu/VBoxContainer"]
+layout_mode = 2
+text = "Score:"
+horizontal_alignment = 1
+
+[node name="Replay" type="Button" parent="Player/Camera2D/GameOverMenu/VBoxContainer"]
+layout_mode = 2
+text = "Play Again?"
+
+[node name="Quit" type="Button" parent="Player/Camera2D/GameOverMenu/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
 [node name="Body" type="Sprite2D" parent="Player"]
 z_index = 1
 position = Vector2(-1.0848e-05, -2.6226e-06)
@@ -365,3 +402,5 @@ texture = SubResource("CanvasTexture_5sge0")
 [connection signal="pressed" from="Player/Camera2D/PauseMenu/VBoxContainer/ResumeButton" to="Player/Camera2D/PauseMenu" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Player/Camera2D/PauseMenu/VBoxContainer/OptionsButton" to="Player/Camera2D/PauseMenu" method="_on_options_button_pressed"]
 [connection signal="pressed" from="Player/Camera2D/PauseMenu/VBoxContainer/QuitButton" to="Player/Camera2D/PauseMenu" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Player/Camera2D/GameOverMenu/VBoxContainer/Replay" to="Player/Camera2D/GameOverMenu" method="_on_replay_pressed"]
+[connection signal="pressed" from="Player/Camera2D/GameOverMenu/VBoxContainer/Quit" to="Player/Camera2D/GameOverMenu" method="_on_quit_pressed"]
