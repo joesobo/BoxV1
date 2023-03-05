@@ -4,6 +4,7 @@ extends RigidBody2D
 @export var max_speed = 1250
 
 var player
+var direction
 
 
 func _ready():
@@ -11,7 +12,7 @@ func _ready():
 
 
 func _process(delta):
-	var direction = player.get_global_position() - global_position
+	direction = player.get_global_position() - global_position
 	linear_velocity += direction.normalized() * speed * delta
 	linear_velocity = linear_velocity.limit_length(max_speed)
 
@@ -43,6 +44,5 @@ func seek(delta):
 
 
 func _on_body_entered(body):
-	print(body)
 	if body == player:
-		player.get_node("PlayerHealth").damage(1)
+		player.get_node("PlayerHealth").damage(1, direction)

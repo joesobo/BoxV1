@@ -14,12 +14,13 @@
 	- [x] Movement / AI
 	- [x] Spawn
 	- [x] Killing
-- [ ] Damage
+- [x] Damage
 	- [x] Taking
 	- [x] Displaying
+	- [x] Knockback
 - [ ] End Screen
 - [x] Timer
-- [ ] Kills
+- [x] Kills
 - [ ] Textures
 - [ ] Effects (Particles)
 - [ ] Main Menu
