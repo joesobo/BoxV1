@@ -4,6 +4,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_su5w3"]
 friction = 0.0
+bounce = 0.1
 
 [sub_resource type="Gradient" id="Gradient_xbhgb"]
 offsets = PackedFloat32Array(0)
@@ -18,6 +19,7 @@ gradient = SubResource("Gradient_xbhgb")
 physics_material_override = SubResource("PhysicsMaterial_su5w3")
 gravity_scale = 2.66454e-15
 continuous_cd = 2
+lock_rotation = true
 script = ExtResource("1_c1vff")
 max_speed = 1000
 

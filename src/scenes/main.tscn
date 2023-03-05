@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://wr0bal1t33v5"]
+[gd_scene load_steps=21 format=3 uid="uid://wr0bal1t33v5"]
 
 [ext_resource type="Script" path="res://src/player/PlayerController.gd" id="1_n6x0h"]
 [ext_resource type="Theme" uid="uid://cs53vtwmuxfcq" path="res://UITheme.tres" id="2_3sd15"]
@@ -18,16 +18,25 @@ colors = PackedColorArray(0.728822, 0.728822, 0.728822, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_mg3hq")
 fill_from = Vector2(1, 0.995652)
 
+[sub_resource type="Gradient" id="Gradient_l2j77"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0.698039, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v1ifi"]
+gradient = SubResource("Gradient_l2j77")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hv0ns"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywvkn"]
-bg_color = Color(1, 0.317647, 0.447059, 1)
+bg_color = Color(0.403922, 0.682353, 0.360784, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="Gradient" id="Gradient_f8jgo"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4c0jx"]
 gradient = SubResource("Gradient_f8jgo")
@@ -52,6 +61,7 @@ max_wall_jump_count = 5
 dash_speed = 3000
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+z_index = 10
 
 [node name="PauseMenu" type="Control" parent="Player/Camera2D"]
 visible = false
@@ -172,10 +182,10 @@ text = "Double Jump:"
 [node name="GameMenu" type="Control" parent="Player/Camera2D"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -575.0
-offset_top = -326.0
-offset_right = 577.0
-offset_bottom = 326.0
+offset_left = -562.0
+offset_top = -328.0
+offset_right = 590.0
+offset_bottom = 324.0
 script = ExtResource("4_y1e38")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Player/Camera2D/GameMenu"]
@@ -197,10 +207,17 @@ text = "Time:"
 layout_mode = 2
 text = "Score:"
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="Body" type="Sprite2D" parent="Player"]
+z_index = 1
 position = Vector2(-1.0848e-05, -2.6226e-06)
 scale = Vector2(0.3125, 0.3125)
 texture = SubResource("GradientTexture2D_vklob")
+
+[node name="Headband" type="Sprite2D" parent="Player/Body"]
+z_index = 2
+position = Vector2(-0.000106812, -20.8)
+scale = Vector2(0.249999, -9.60006)
+texture = SubResource("GradientTexture1D_v1ifi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_hv0ns")
@@ -220,6 +237,7 @@ theme = ExtResource("2_3sd15")
 theme_override_styles/panel = SubResource("StyleBoxFlat_ywvkn")
 
 [node name="RightWall" type="RayCast2D" parent="Player"]
+position = Vector2(0, 1)
 rotation = -1.5708
 target_position = Vector2(2.08165e-12, 15)
 
@@ -229,17 +247,19 @@ rotation = 1.5708
 target_position = Vector2(2.08165e-12, 15)
 
 [node name="Gun" type="Node2D" parent="Player"]
+position = Vector2(0, 2)
 script = ExtResource("6_t1ta0")
 bullet_scene = ExtResource("6_gk67w")
 bullet_speed = 2000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Player/Gun"]
-scale = Vector2(0.3125, 0.0624997)
+position = Vector2(0, 0.500013)
+scale = Vector2(0.375, 0.0781251)
 texture = SubResource("GradientTexture2D_4c0jx")
 offset = Vector2(32, 2.08165e-12)
 
 [node name="SpawnPosition" type="Node2D" parent="Player/Gun"]
-position = Vector2(22, 0)
+position = Vector2(25, 0)
 
 [node name="Floors" type="Node" parent="."]
 
