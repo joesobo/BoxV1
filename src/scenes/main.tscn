@@ -207,6 +207,7 @@ layout_mode = 2
 text = "Score:"
 
 [node name="GameOverMenu" type="Control" parent="Player/Camera2D"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -545.0
